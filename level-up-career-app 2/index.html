@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0b1020">
+<meta name="description" content="A personal career quest app for building data, software, and analytics skills.">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<title>Level Up — Career Quest</title>
+<style>
+:root{--bg:#0b1020;--panel:#141d32;--panel2:#1b2741;--line:#293653;--ink:#eff3ff;--muted:#98a5c1;--purple:#a7a8ff;--mint:#63dfc3;--gold:#f3cc82}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 20% -10%,#26345d 0,transparent 42%),var(--bg);color:var(--ink);font:15px/1.45 Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;min-height:100vh}
+button,a{font:inherit}button{cursor:pointer}.app{max-width:980px;margin:auto;padding:env(safe-area-inset-top) 16px calc(92px + env(safe-area-inset-bottom))}
+header{display:flex;align-items:center;justify-content:space-between;padding:20px 0 12px}.brand{display:flex;align-items:center;gap:11px}.logo{height:42px;width:42px;border-radius:14px;background:linear-gradient(140deg,#9a9cff,#57dfc4);display:grid;place-items:center;color:#11182b;font-size:22px;font-weight:900;box-shadow:0 8px 30px #777dff33}.brand strong{letter-spacing:.13em;font-size:14px}.brand small{display:block;color:var(--muted);font-size:10px;letter-spacing:.16em}.top-pill,.tag{border:1px solid #394765;border-radius:99px;color:#c8d2ed;padding:6px 10px;font-size:11px}
+h1{font-size:clamp(26px,5vw,36px);line-height:1.1;margin:8px 0}.sub{color:var(--muted);margin:0 0 18px}.eyebrow{font-size:10px;letter-spacing:.16em;color:#aab4d0;font-weight:700;text-transform:uppercase}
+.grid{display:grid;gap:13px}.hero{background:linear-gradient(120deg,#252f58,#192943);border:1px solid #3a4770;border-radius:22px;padding:18px;position:relative;overflow:hidden}.hero:after{content:"✦";position:absolute;right:20px;top:5px;font-size:80px;color:#ffffff0c}.hero-title{font-size:21px;font-weight:800;margin-top:4px}.muted{color:var(--muted)}.row{display:flex;align-items:center;justify-content:space-between;gap:10px}.bar{height:8px;background:#303c58;border-radius:20px;overflow:hidden}.bar span{display:block;height:100%;background:linear-gradient(90deg,#9a9cff,#58ddc2);border-radius:20px;transition:width .2s}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin:12px 0}.stat,.card{background:linear-gradient(160deg,#172139,#121a2d);border:1px solid var(--line);border-radius:17px;padding:14px}.stat b{display:block;font-size:23px}.stat small{font-size:10px;color:var(--muted)}
+.card h2{font-size:16px;margin:0 0 4px}.section-head{display:flex;align-items:center;justify-content:space-between;margin:21px 0 10px}.section-head h2{font-size:16px;margin:0}.quest{display:flex;align-items:center;gap:11px;padding:13px 0;border-bottom:1px solid var(--line)}.quest:last-child{border:0}.check{height:25px;width:25px;flex:none;border:1px solid #61708f;border-radius:8px;background:transparent;color:transparent}.check.done{background:var(--mint);border-color:var(--mint);color:#102033;font-weight:900}.quest-title{font-weight:700;font-size:14px}.quest-desc{font-size:12px;color:var(--muted)}.xp{color:var(--mint);font-size:11px;white-space:nowrap}
+.affirm{border-color:#494778;background:linear-gradient(130deg,#242746,#182a3b)}.affirm blockquote{font-size:19px;line-height:1.35;font-weight:700;margin:10px 0}.affirm p{font-size:12px;color:#b9c4df;margin:0}
+.tabs{position:fixed;z-index:5;bottom:0;left:0;right:0;padding:8px 8px calc(8px + env(safe-area-inset-bottom));display:flex;justify-content:center;gap:3px;background:#0e1628f2;backdrop-filter:blur(16px);border-top:1px solid #293653}.tab{border:0;background:transparent;color:#98a5c1;border-radius:12px;padding:8px 5px;flex:1;max-width:130px;font-size:10px}.tab span{display:block;font-size:19px;margin-bottom:2px}.tab.active{background:#252f50;color:#c7c8ff}
+.screen{display:none}.screen.active{display:block}.skill{display:grid;grid-template-columns:40px 1fr auto;gap:11px;align-items:center;padding:13px 0;border-bottom:1px solid var(--line)}.skill:last-child{border:0}.skill-icon{height:38px;border-radius:12px;background:#273454;display:grid;place-items:center;color:#c2c5ff;font-weight:800;font-size:12px}.skill-name{font-weight:700}.skill-desc{font-size:11px;color:var(--muted);margin:2px 0 7px}.level{font-size:10px;border:1px solid #3a4968;border-radius:99px;padding:5px 8px;color:#cbd5ee}
+.btn{border:1px solid #526184;background:#242f4d;color:#e7ecff;border-radius:10px;padding:9px 12px;font-size:12px;text-decoration:none;display:inline-block}.btn.primary{background:#a4a6ff;color:#10162b;border:0;font-weight:800}.news-item{padding:13px 0;border-bottom:1px solid var(--line)}.news-item:last-child{border:0}.news-item p{font-size:12px;color:var(--muted);margin:4px 0 9px}.news-item a{color:#bfc5ff;font-size:12px;text-decoration:none}.source-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.source{border:1px solid var(--line);background:#18233a;border-radius:13px;padding:12px;text-decoration:none;color:var(--ink)}.source b{display:block;font-size:12px}.source small{font-size:10px;color:var(--muted)}
+.roadmap-step{display:flex;gap:13px;padding:12px 0}.roadmap-icon{width:32px;flex:none;font-size:20px}.roadmap-step b{font-size:14px}.roadmap-step p{font-size:12px;color:var(--muted);margin:4px 0}.divider{border-left:1px dashed #526184;margin-left:15px;height:18px}
+.challenge{background:#192a3d;border:1px solid #31516a;border-radius:15px;padding:14px}.challenge strong{color:var(--mint)}.footer-note{text-align:center;color:#71809f;font-size:10px;padding:18px 0 6px}
+@media(min-width:720px){.app{padding-top:22px}.home-layout{grid-template-columns:1.2fr .8fr;align-items:start}.home-side{display:grid;gap:13px}.source-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+</style>
+</head>
+<body>
+<div class="app">
+<header><div class="brand"><div class="logo">L</div><div><strong>LEVEL UP</strong><small>YOUR CAREER QUEST</small></div></div><div class="top-pill">✦ PERSONAL MODE</div></header>
+<section id="home" class="screen active">
+ <div class="eyebrow" id="today-label">YOUR DAILY QUEST</div><h1>Build your future.</h1><p class="sub">Small progress. Real career skills.</p>
+ <div class="grid home-layout">
+  <div>
+   <div class="hero"><div class="eyebrow">CURRENT RANK</div><div class="hero-title">Skill Builder <span style="color:var(--gold)">✦</span></div><div class="muted" style="font-size:12px">Level <span id="level">3</span> · Working toward internship-ready</div><div class="row" style="font-size:11px;margin:19px 0 7px"><span class="muted">CAREER XP</span><b id="xp-label">240 / 400 XP</b></div><div class="bar"><span id="xp-bar" style="width:60%"></span></div><div class="muted" id="xp-next" style="font-size:10px;margin-top:7px">160 XP until your next level</div></div>
+   <div class="stats"><div class="stat"><b id="done-count">0/3</b><small>Quests done</small></div><div class="stat"><b id="week-count">0</b><small>This week</small></div><div class="stat"><b>2027</b><small>Internship target</small></div></div>
+   <div class="section-head"><h2>Today's quests</h2><span class="tag">EARN XP</span></div><div class="card" id="quests"></div>
+   <div class="section-head"><h2>Weekly mission</h2><span class="muted" style="font-size:11px">FLEXIBLE TARGETS</span></div><div class="card"><div class="row"><b style="font-size:13px">Career momentum</b><span id="weekly-progress" class="muted" style="font-size:11px">0 / 4 goals</span></div><div class="bar" style="margin:10px 0"><span id="weekly-bar" style="width:0%"></span></div><div class="muted" style="font-size:11px">2 skill sprints · 3 career scouts · 2 career moves · 3 proof logs</div></div>
+  </div>
+  <div class="home-side">
+   <div class="card affirm"><div class="eyebrow">☀ DAILY AFFIRMATION</div><blockquote id="affirmation"></blockquote><p id="affirmation-sub"></p></div>
+   <div class="challenge"><div class="eyebrow">⚡ MINI LEARNING CHALLENGE</div><h2 id="challenge-title" style="margin:7px 0;font-size:15px"></h2><p id="challenge-desc" class="muted" style="font-size:12px;margin:0 0 10px"></p><button class="btn" id="challenge-done">Mark as explored</button></div>
+   <div class="card"><div class="eyebrow">YOUR CAREER DIRECTION</div><h2 style="margin:7px 0">Data Analytics → BI / Data Engineering / Data Science</h2><p class="muted" style="font-size:12px;margin:0">Keep your CS fundamentals strong while you explore adjacent paths.</p></div>
+  </div>
+ </div>
+</section>
+<section id="skills" class="screen"><div class="eyebrow">YOUR SKILL TREE</div><h1>Build your toolkit.</h1><p class="sub">Prioritize skills that show up in real roles.</p><div class="card">
+<div class="skill"><div class="skill-icon">SQL</div><div><div class="skill-name">SQL</div><div class="skill-desc">Filtering, joins, grouping, data quality</div><div class="bar"><span style="width:35%"></span></div></div><span class="level">Lv. 2</span></div>
+<div class="skill"><div class="skill-icon">Py</div><div><div class="skill-name">Python</div><div class="skill-desc">Functions, pandas, debugging, tests</div><div class="bar"><span style="width:25%"></span></div></div><span class="level">Lv. 1</span></div>
+<div class="skill"><div class="skill-icon">Σ</div><div><div class="skill-name">Statistics</div><div class="skill-desc">Probability, distributions, inference</div><div class="bar"><span style="width:18%"></span></div></div><span class="level">Lv. 1</span></div>
+<div class="skill"><div class="skill-icon">BI</div><div><div class="skill-name">BI & dashboards</div><div class="skill-desc">Excel, Power BI or Tableau, storytelling</div><div class="bar"><span style="width:10%"></span></div></div><span class="level">Lv. 1</span></div>
+<div class="skill"><div class="skill-icon">Git</div><div><div class="skill-name">Git & GitHub</div><div class="skill-desc">Version control, README files, portfolio</div><div class="bar"><span style="width:8%"></span></div></div><span class="level">Lv. 1</span></div>
+</div><p class="muted" style="font-size:11px;margin-top:12px">Progress bars are starting estimates, not formal assessments. Update them as you create evidence of each skill.</p></section>
+<section id="radar" class="screen"><div class="eyebrow">PERSONALIZED TECH RADAR</div><h1>Know what's changing.</h1><p class="sub">Follow current developments that matter to data, AI, and software careers.</p>
+<div class="card"><div class="row"><h2>Latest topic searches</h2><span class="tag">LIVE SEARCH LINKS</span></div><p class="muted" style="font-size:11px">These open fresh search results rather than pretending this offline app has a live news backend.</p>
+<div id="topic-links" class="grid" style="grid-template-columns:1fr 1fr"></div></div>
+<div class="section-head"><h2>Trusted source watchlist</h2><span class="muted" style="font-size:10px">OFFICIAL / PRIMARY SOURCES</span></div>
+<div class="source-grid">
+<a class="source" href="https://openai.com/news/" target="_blank" rel="noopener"><b>OpenAI News ↗</b><small>AI models & research</small></a>
+<a class="source" href="https://blog.google/technology/ai/" target="_blank" rel="noopener"><b>Google AI ↗</b><small>AI products & research</small></a>
+<a class="source" href="https://github.blog/changelog/" target="_blank" rel="noopener"><b>GitHub Changelog ↗</b><small>Developer tools</small></a>
+<a class="source" href="https://aws.amazon.com/new/" target="_blank" rel="noopener"><b>AWS What's New ↗</b><small>Cloud & data infrastructure</small></a>
+<a class="source" href="https://cloud.google.com/blog/products/data-analytics" target="_blank" rel="noopener"><b>Google Cloud Data ↗</b><small>Analytics & data engineering</small></a>
+<a class="source" href="https://www.microsoft.com/en-us/research/blog/" target="_blank" rel="noopener"><b>Microsoft Research ↗</b><small>Research & computing</small></a>
+<a class="source" href="https://www.getdbt.com/blog" target="_blank" rel="noopener"><b>dbt Blog ↗</b><small>Analytics engineering</small></a>
+<a class="source" href="https://www.bls.gov/ooh/" target="_blank" rel="noopener"><b>BLS Occupational Outlook ↗</b><small>U.S. career outlook</small></a>
+</div>
+<div class="card" style="margin-top:13px"><div class="eyebrow">HOW TO USE THE RADAR</div><p class="muted" style="font-size:12px;margin-bottom:0">Prioritize changes that affect the tools employers use, the skills in internship postings, data privacy and security, and how teams build software. For each story, ask: What changed? Why does it matter? Should I learn or try anything?</p></div>
+</section>
+<section id="roadmap" class="screen"><div class="eyebrow">CAREER MAP</div><h1>Your next milestones.</h1><p class="sub">A route from foundations to your first technical role.</p><div class="card">
+<div class="roadmap-step"><div class="roadmap-icon">📍</div><div><b>Now · Build foundations</b><p>Strengthen SQL, Python, statistics, Excel, and GitHub. Keep a steady weekly routine.</p><span class="tag">CURRENT STAGE</span></div></div><div class="divider"></div>
+<div class="roadmap-step"><div class="roadmap-icon">🧩</div><div><b>Spring 2027 · Show your skills</b><p>Complete a polished analytics project with Python and SQL. Publish a BI dashboard and clear README.</p></div></div><div class="divider"></div>
+<div class="roadmap-step"><div class="roadmap-icon">🚀</div><div><b>Summer 2027 · Gain experience</b><p>Target an internship, research role, or substantial real-world technical project.</p></div></div><div class="divider"></div>
+<div class="roadmap-step"><div class="roadmap-icon">🏆</div><div><b>By May 2028 · Career-ready</b><p>Graduate with demonstrable projects, practical experience, interview skills, and a focused job search.</p></div></div>
+</div><div class="card" style="margin-top:13px"><div class="eyebrow">WEEKLY WIN CONDITION</div><h2 style="margin:7px 0">A realistic routine</h2><p class="muted" style="font-size:12px;margin:0">2 skill sprints · 3 career scouts · 2 career moves · 3 proof logs. Aim for 1–2 quality applications when good roles are available. Busy day? A five-minute task counts as keeping momentum.</p></div></section>
+<section id="profile" class="screen"><div class="eyebrow">PLAYER PROFILE</div><h1>Career character.</h1><p class="sub">Your progress is about evidence, not perfect streaks.</p><div class="card"><div style="font-size:38px">🧑‍💻</div><h2 style="margin:8px 0 3px">Aspiring Data Professional</h2><p class="muted" style="font-size:12px;margin:0">Computer Science · Data Science & Machine Learning interests</p><div class="stats"><div class="stat"><b id="profile-level">3</b><small>Level</small></div><div class="stat"><b id="profile-xp">240</b><small>Total XP</small></div><div class="stat"><b id="profile-complete">0</b><small>Quests done</small></div></div></div><div class="card" style="margin-top:13px"><h2>How progress works</h2><p class="muted" style="font-size:12px">Complete a learning task, save evidence, or take a meaningful career action. Your progress is saved on this device. XP is motivation; your portfolio and demonstrated skills are what matter to employers.</p><button class="btn" id="reset-data">Reset demo progress</button></div></section>
+<div class="footer-note">LEVEL UP · Built for steady progress, not pressure.</div>
+</div>
+<nav class="tabs" aria-label="Main navigation">
+<button class="tab active" data-tab="home"><span>⌂</span>Home</button><button class="tab" data-tab="skills"><span>◇</span>Skills</button><button class="tab" data-tab="radar"><span>◉</span>Tech Radar</button><button class="tab" data-tab="roadmap"><span>⌁</span>Roadmap</button><button class="tab" data-tab="profile"><span>◎</span>Profile</button>
+</nav>
+<script src="app.js"></script>
+</body></html>
